@@ -1,0 +1,43 @@
+import LayoutWrapper from '@/components/Layout/LayoutWrapper';
+import Breadcrumbs from '@/components/UI/Breadcrumbs';
+import Title from '@/components/UI/Title';
+import { Language } from '@/models/language';
+import type { Metadata } from 'next';
+import ProductList from '@/components/ProductList';
+import NoResult from '@/components/UI/NoResult';
+import { getProducts, getSettings } from '@/app/api/api';
+import { language } from '@/lib/language';
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: Language }> }): Promise<Metadata> {
+	const { locale } = await params;
+	const lang = language(locale);
+	const settings = await getSettings();
+
+	return {
+		title: settings[lang].meta_title,
+		description: settings[lang].meta_description,
+	}
+}
+
+export default async function AutoGoods() {
+	const products = await getProducts('?typeproduct=5&categories=7', 0, 12);
+
+	const path = [
+		{
+			title: 'auto goods',
+			href: '/',
+			translations: true
+		}
+	];
+
+	return (
+		<LayoutWrapper className='max-w-7xl'>
+			<Breadcrumbs path={ path } />
+			<Title isMain={ true } title='auto goods' translations={ true } className='mt-3 text-lg font-medium px-0 md:px-3 mb-3 md:mb-1' />
+			{ products.result ? <ProductList
+				classnames='grid-cols-1 sm:grid-cols-2 md:grid-cols-4'
+				data={ products.data }
+			/> : <NoResult noResultText='no result' /> }
+		</LayoutWrapper>
+	)
+};
