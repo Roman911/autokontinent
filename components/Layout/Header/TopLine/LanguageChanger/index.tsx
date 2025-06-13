@@ -14,7 +14,7 @@ const LanguageChanger = () => {
 	const locale = useLocale();
 
 	return (
-		<div className='divide-x divide-white/40 font-semibold text-sm 2xl:text-base ml-auto md:ml-0 mr-2'>
+		<div className='divide-x divide-white/40 font-semibold text-sm 2xl:text-base ml-auto md:ml-0'>
 			{ params.map((item, index) => {
 				return <Link
 					locale={ item.language }
@@ -22,10 +22,10 @@ const LanguageChanger = () => {
 					href={ pathname }
 					className={
 						twMerge(
-							'leading-8 pr-1.5 2xl:pr-3 text-white/40 active:text-white hover:text-white',
+							'leading-8 text-white/40 active:text-white hover:text-white',
 							locale === item.language && 'text-white pointer-events-none',
 							index === 0 && 'pr-1.5 2xl:pr-2',
-							index === 1 && 'pl-1.5 2xl:px-2'
+							index === 1 && 'pl-1.5 2xl:pl-2'
 						)
 					}>
 					{ item.title }

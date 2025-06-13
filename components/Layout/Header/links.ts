@@ -1,9 +1,5 @@
 export const links = [
 	{
-		title: 'battery',
-		url: '/catalog/battery',
-	},
-	{
 		title: 'auto goods',
 		url: '/auto-goods',
 	},

@@ -8,7 +8,7 @@ const MyProgress = () => {
 	if (!progress) return null;
 
 	return (
-		<div className="fixed top-0 left-0 w-full">
+		<div className="fixed top-0 left-0 w-full z-50">
 			<Progress color='primary' isIndeterminate aria-label="Loading..." size="sm" />
 		</div>
 	);

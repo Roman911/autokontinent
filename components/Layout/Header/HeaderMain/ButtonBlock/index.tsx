@@ -36,7 +36,7 @@ const ButtonBlock = () => {
 		<>
 			<Link href='/comparison' className='relative'>
 				<Badge
-					color='primary'
+					color='secondary'
 					content={ comparisonItems.length }
 					isInvisible={ comparisonItems.length === 0 }
 					className='border-white'
@@ -46,7 +46,7 @@ const ButtonBlock = () => {
 			</Link>
 			<Link href='/bookmarks' className='relative' onClick={ () => dispatch(setProgress(true)) }>
 				<Badge
-					color='primary'
+					color='secondary'
 					content={ bookmarksItems.length }
 					isInvisible={ bookmarksItems.length === 0 }
 					className='border-white'
@@ -56,7 +56,7 @@ const ButtonBlock = () => {
 			</Link>
 			<Link href='/cart' className='relative' onClick={ () => dispatch(setProgress(true)) }>
 				<Badge
-					color='primary'
+					color='secondary'
 					content={ cartItems.length }
 					isInvisible={ cartItems.length === 0 }
 					className='border-white'

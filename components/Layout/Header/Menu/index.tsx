@@ -6,7 +6,7 @@ import { Link } from '@/i18n/routing';
 import CarTireFilter from './CarTireFilter';
 import CarDiskFilter from './CarDiskFilter';
 import * as Icons from '@/components/UI/Icons';
-import { Button } from '@heroui/react';
+import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@heroui/react';
 import { links } from '../links';
 import { Section } from '@/models/section';
 
@@ -27,7 +27,7 @@ const Navbar = () => {
 				variant='light'
 				size='lg'
 				radius='none'
-				className='font-semibold h-14 uppercase'
+				className='font-semibold h-12 uppercase'
 				endContent={ <Icons.ChevronDownIcon
 					width='14'
 					height='14'
@@ -54,10 +54,34 @@ const Navbar = () => {
 						return <ButtonMeu key={ i } sectionItem={ item.section } label={ item.label } />
 					})}
 				{ links.map((item, index) => {
-					return <Link key={ index } href={ item.url } className='font-semibold hover:bg-gray-200 h-14 px-6 flex items-center uppercase'>
+					return <Link key={ index } href={ item.url } className='font-semibold hover:bg-gray-200 h-12 px-6 flex items-center uppercase'>
 						{ t(item.title) }
 					</Link>
 				}) }
+				<Dropdown radius='sm'>
+					<DropdownTrigger>
+						<Button
+							variant='light'
+							size='lg'
+							radius='none'
+							className='font-semibold h-12 uppercase w-40'
+							endContent={ <Icons.ChevronDownIcon
+								width='14'
+								height='14'
+								strokeWidth='2'
+								className='stroke-gray-900 transition'
+							/> }
+						>
+							{ t('brands') }
+						</Button>
+					</DropdownTrigger>
+					<DropdownMenu aria-label="Brands">
+						<DropdownItem as={ Link } href='/catalog-map/tyre' key='tyres'>{ t('tires') }</DropdownItem>
+						<DropdownItem as={ Link } href='/catalog-map/disc' key='disks'>{ t('disks') }</DropdownItem>
+						<DropdownItem as={ Link } href='/catalog-map/akum' key='battery'>{ t('battery') }</DropdownItem>
+						<DropdownItem as={ Link } href='/catalog-map/car' key='cars'>{ t('cars') }</DropdownItem>
+					</DropdownMenu>
+				</Dropdown>
 			</nav>
 		</div>
 	)

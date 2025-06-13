@@ -58,7 +58,7 @@ export default async function RootLayout({
 		<StoreProvider>
 			<NextIntlClientProvider messages={ messages }>
 				<Header settings={ response } alias={ alias }/>
-				<main>
+				<main className='xl:ml-32'>
 					{ children }
 				</main>
 				<Footer settings={ response } alias={ alias }/>
