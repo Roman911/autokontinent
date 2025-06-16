@@ -8,7 +8,6 @@ import * as Icons from '@/components/UI/Icons';
 import { AliasAll, AliasItem } from '@/models/alias';
 import { Language, LanguageCode } from '@/models/language';
 import { SettingsProps } from '@/models/settings';
-import Logo from '../Logo';
 import { useAppDispatch } from '@/hooks/redux';
 import { setProgress } from '@/store/slices/progressSlice';
 import Contacts from '@/components/Layout/Header/Contacts';
