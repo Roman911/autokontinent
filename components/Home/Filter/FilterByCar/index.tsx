@@ -110,10 +110,12 @@ const FilterByCar: FC<Props> = ({ section }) => {
 				{ section: Section.Disks, label: 'choose disks', isLoading: isLoadingDisks }
 			].map(({ section: btnSection, label, isLoading }) => (
 				<Button
+					color='secondary'
 					key={ btnSection }
 					isDisabled={ !carFilters.modification }
 					isLoading={ isLoading }
 					onPress={ () => handleSubmit(btnSection) }
+					className='text-black'
 				>
 					{ t(label) }
 				</Button>

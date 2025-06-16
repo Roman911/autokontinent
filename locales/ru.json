@@ -150,7 +150,8 @@
     "tire calculator": "Шинный калькулятор",
     "tires": "Шины",
     "goods": "Товары",
-    "to": "До"
+    "to": "До",
+    "free shipping": "Бесплатная доставка в пределах Украины."
   },
   "HeaderFilter": {
     "add all": "Добавить все",
@@ -191,6 +192,8 @@
     "about us": "О нас",
     "accessories": "Аксессуары",
     "akb": "Акб",
+    "all tires": "Все шины",
+    "all disks": "Все диски",
     "auto goods": "Автотовары",
     "battery": "Аккумуляторы",
     "brands": "Бренды",

@@ -43,7 +43,7 @@ const CarTireFilter = ({ onClick }: { onClick?: () => void }) => {
 			<Link
 				onClick={ onClick }
 				href='/catalog/tires'
-				className='text-gray-400 font-bold uppercase underline hover:text-primary'
+				className='text-gray-800 font-semibold uppercase underline hover:text-primary'
 			>
 				{ t('all brands') }
 			</Link>

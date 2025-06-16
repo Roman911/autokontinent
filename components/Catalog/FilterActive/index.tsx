@@ -43,11 +43,11 @@ const FilterActive: FC<FilterActiveProps> = ({ className, slug, section }) => {
 
 		return (
 			<div key={ key }
-					 className="p-1 bg-[#393939] text-white text-sm font-medium rounded-full flex items-center gap-1">
+					 className="p-1 bg-gray-800 text-white text-sm font-medium rounded-full flex items-center gap-1">
 				<span className="ml-1.5">{ label }</span>
 				<Link href={ `/catalog/${ section }/${ slug?.length ? cleanArray(slug).join('/') : '' }` }
-							className='bg-[#A8AFB6] rounded-full p-1'>
-					<Icons.CloseIcon className="stroke-[#393939] h-3 w-3"/>
+							className='bg-white rounded-full p-1'>
+					<Icons.CloseIcon className="stroke-gray-800 h-3 w-3"/>
 				</Link>
 			</div>
 		);

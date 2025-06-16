@@ -16,10 +16,10 @@ const LinkComponent: FC<Props> = ({ href, img, label, mt, border, onClick }) => 
 	return <Link
 		onClick={ onClick }
 		href={ href }
-		className={ twMerge('flex items-center gap-2.5 group/item', mt,
+		className={ twMerge('flex items-center gap-2.5 group/item hover:text-primary', mt,
 			border &&
-			'w-12 lg:w-14 h-10 text-sm lg:text-base justify-center font-medium border border-gray-700 rounded-sm bg-white '
-			+ 'transition hover:text-primary hover:border-primary'
+			'w-12 lg:w-14 h-10 text-sm lg:text-base justify-center font-medium border border-gray-700 rounded-sm hover:border-primary hover:bg-blue-100 '
+			+ 'transition'
 		)}
 	>
 		{ img && <Image

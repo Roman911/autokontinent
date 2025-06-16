@@ -26,10 +26,9 @@ const cargo = [ '3', '4', '5', '6', '9', '10', '11' ];
 
 interface Props {
 	item: Product
-	isList?: boolean
 }
 
-const ProductCard: FC<Props> = ({ item, isList }) => {
+const ProductCard: FC<Props> = ({ item }) => {
 	const locale = useLocale();
 	const router = useRouter();
 	const pathname = usePathname();
@@ -58,24 +57,24 @@ const ProductCard: FC<Props> = ({ item, isList }) => {
 
 	return (
 		<Card radius='none' className='relative group mb-[1px] p-0 shadow-sm !transition duration-150 ease-in-out hover:shadow-xl/20 hover:z-10 hover:scale-105'>
-			<CardBody className={ twMerge('p-0', isList && 'flex-row align-center justify-between') }>
-				<div className={ twMerge('relative min-h-32 sm:min-h-52 pb-0 lg:pb-5 p-5 text-center', isList && 'min-h-24 sm:min-h-36 min-w-36 md:min-w-60') }>
+			<CardBody className='p-0'>
+				<div className='relative min-h-32 sm:min-h-52 pb-0 lg:pb-5 p-5 text-center'>
 					<IconsBlock season={ season } vehicle_type={ vehicle_type }/>
 					{ !hasMatch && <ActionsBlock sectionNew={ sectionNew } group={ group } /> }
 					<Image
 						className={ twMerge('mx-auto', model.model_images.length > 0 && 'group-hover:hidden') }
 						src={ default_photo || (locale === Language.UK ? '/images/no-photo.jpg' : '/images/no-photo-ru.jpg') }
 						alt={ full_name }
-						width={ isList ? 160 : 220 }
-						height={ isList ? 160 : 220 }
+						width={ 220 }
+						height={ 220 }
 						loading='lazy'
 					/>
 					{ model.model_images.length > 0 && <Image
 						className='mx-auto hidden group-hover:block'
 						src={ model.model_images[0].small }
 						alt={ full_name }
-						width={ isList ? 160 : 220 }
-						height={ isList ? 160 : 220 }
+						width={ 220 }
+						height={ 220 }
 						loading='lazy'
 					/> }
 				</div>
@@ -83,7 +82,7 @@ const ProductCard: FC<Props> = ({ item, isList }) => {
 					<Link
 						href={ url }
 						onClick={ () => { dispatch(setProgress(true)) }}
-						className={ twMerge('font-medium text-gray-900 my-1 md:my-2.5 min-h-18 md:min-h-12 after:absolute after:inset-0', isList && 'min-h-auto') }
+						className='font-medium text-gray-900 my-1 md:my-2.5 min-h-18 md:min-h-12 after:absolute after:inset-0'
 					>
 						{ full_name }
 					</Link>
@@ -99,13 +98,13 @@ const ProductCard: FC<Props> = ({ item, isList }) => {
 					</div> }
 					<Rating commentsCount={ undefined } commentsAvgRate={ 0 }/>
 				</div>
-				{ section !== Section.Battery && !isList && <div className='flex text-sm text-gray-400 mt-2 px-2 md:px-5 md:hidden'>
+				{ section !== Section.Battery && <div className='flex text-sm text-gray-400 mt-2 px-2 md:px-5 md:hidden'>
 					<div className='lowercase'>{ t('from') }</div>
 					<div className='font-bold mx-1'>{ min_price * 4 } ₴</div>
 					<div>за 4 шт.</div>
 				</div> }
-				<div className={ twMerge('px-2 md:px-5 pt-4 pb-5', isList && 'ml-auto') }>
-					<div className={ twMerge('w-full flex items-center justify-between', isList && 'flex-col h-full justify-end gap-4') }>
+				<div className='px-2 md:px-5 pt-4 pb-5'>
+					<div className='w-full flex items-center justify-between'>
 						<div>
 							<div className='flex items-end mb-0.5 text-gray-900'>
 								<div className='hidden md:block text-sm font-medium mb-0.5 mr-1 lowercase'>{ t('from') }</div>
@@ -117,8 +116,8 @@ const ProductCard: FC<Props> = ({ item, isList }) => {
 								<div>за 4 шт.</div>
 							</div> }
 						</div>
-						<Button onPress={ handleClick } aria-label={ t('cart') } className='min-w-16 md:min-w-24'>
-							<Icons.CartIcon className='stroke-white'/>
+						<Button onPress={ handleClick } color='secondary' aria-label={ t('cart') } className='min-w-16 md:min-w-24 text-black'>
+							<Icons.CartIcon />
 						</Button>
 					</div>
 				</div>

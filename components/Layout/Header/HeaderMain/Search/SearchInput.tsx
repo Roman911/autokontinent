@@ -73,7 +73,7 @@ export const SearchInput = ({ value, onChange, onSubmit }: SearchInputProps) => 
 						isIconOnly
 						aria-label='Search'
 						radius='sm'
-						className='w-16 h-11 -mr-1 bg-secondary'
+						className='w-16 h-11 -mr-1 bg-primary'
 					>
 						<Icons.SearchIcon className='fill-white'/>
 					</Button>

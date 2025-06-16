@@ -11,9 +11,8 @@ import { getFilters } from './getFilters';
 import { Section } from '@/models/section';
 import { generateUrl } from '@/lib/seo';
 import FilterByCar from './FilterByCar';
-import styles from './index.module.scss';
-import { twMerge } from 'tailwind-merge';
 import { Subsection } from '@/models/filter';
+import { ReactSlick } from '@/components/Home/Filter/ReactSlick';
 
 const Filter = () => {
 	const router = useRouter();
@@ -47,7 +46,8 @@ const Filter = () => {
 	}
 
 	return (
-		<section className={ twMerge(styles['home-filter'], 'w-full py-6 px-2 md:p-0 h-[600] md:h-[750px] relative flex', styles[`home-filter__tires`]) }>
+		<section className='w-full relative flex'>
+			<ReactSlick />
 			<FilterBlock onSubmit={ submit } section={ section }>
 				{ section === Section.Car ?
 					<FilterByCar section={ section } /> :

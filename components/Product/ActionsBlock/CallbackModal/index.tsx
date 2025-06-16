@@ -57,7 +57,7 @@ const CallbackModal: FC<Props> = ({ id, quantity }) => {
 	return (
 		<>
 			<button onClick={ onOpen } aria-label='mail' className='group relative'>
-				<span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-300 opacity-75"></span>
+				<span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-300 opacity-75"></span>
 				<span className="relative inline-flex rounded-full w-12 h-12 bg-primary p-3">
 					<Icons.PhoneCircuitIcon className='stroke-white'/>
 				</span>

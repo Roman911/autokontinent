@@ -51,7 +51,7 @@ const AddToDefense: FC<Props> = ({ id, section, isProduct }) => {
 			aria-label='Defense'
 			radius='full'
 			variant={ isProduct ? 'flat' : 'light' }
-			className={ twMerge('text-gray-400 hover:text-primary', isBookmarks && 'text-primary', isProduct && 'bg-gray-200 w-12 h-12 p-3') }
+			className={ twMerge('text-gray-400 hover:text-primary', isBookmarks && 'text-primary', isProduct && 'bg-gray-100 w-12 h-12 p-3') }
 		>
 			<Icons.HeartIcon
 				className={ twMerge( isBookmarks && 'fill-primary text-primary') }/>

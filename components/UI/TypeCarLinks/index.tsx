@@ -63,15 +63,14 @@ const LinkComponent: FC<ILinkComponent> = (
 	>
 		<IconComponent className={
 			twMerge(
-				'transition group-hover/item:text-gray-900 text-gray-400',
-				section === 'catalog' && 'group-hover/item:text-primary',
+				'transition group-hover/item:text-blue-300 text-gray-400',
 				active && 'text-primary',
 			)
 		}/>
 		<span className={
 			twMerge(
-				'transition',
-				section === 'catalog' && 'text-sm text-gray-400 group-hover/item:text-primary',
+				'transition group-hover/item:text-primary',
+				section === 'catalog' && 'text-sm text-gray-400',
 				section === 'header' && 'group-hover/item:underline',
 				active && 'text-primary',
 			)

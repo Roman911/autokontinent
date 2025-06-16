@@ -3,9 +3,9 @@ import Image from 'next/image';
 import { twMerge } from 'tailwind-merge';
 import { Labels, Photo } from '@/models/product';
 import { Language } from '@/models/language';
-import { ReactImageGallery } from './ReactImageGallery';
 import { SeasonTransform, VehicleTypeTransform } from '@/lib/characteristicsTransform';
 import * as Icons from '../../UI/Icons';
+import { ReactSlick } from '@/components/Product/ImagesBlock/ReactSlick';
 
 const IconsObj = {
 	light: Icons.CarIcon,
@@ -35,8 +35,8 @@ const ImagesBlock: FC<Props> = ({ locale, labels, images, photo, full_name, vehi
 	const seasonTransform = season && SeasonTransform(season)?.icon;
 
 	return (
-		<div className={ twMerge('gallery relative mb-2 md:mb-7 pt-10 pb-2 md:pb-5 rounded-lg w-full') }>
-			<div className='-mt-8 px-4 mb-2 w-full flex justify-between items-start'>
+		<div className={ twMerge('gallery relative mb-7 pt-10 pb-5 max-w-full min-w-80') }>
+			<div className='-mt-10 mb-2 w-full flex justify-between items-start'>
 				<div>
 					{ labels?.length !== 0 && labels?.map(item => {
 						return <div
@@ -49,7 +49,7 @@ const ImagesBlock: FC<Props> = ({ locale, labels, images, photo, full_name, vehi
 					}) }
 					<div className='flex gap-x-2'>
 						{ IconComponent && (
-							<IconComponent className='text-gray-500' />) }
+							<IconComponent className={ twMerge('fill-gray-500', vehicle_type === '2' && 'stroke-gray-500') }/>) }
 						{ seasonTransform && <Image src={ seasonTransform } height={ 24 } width={ 24 } alt=""/> }
 					</div>
 				</div>
@@ -60,7 +60,7 @@ const ImagesBlock: FC<Props> = ({ locale, labels, images, photo, full_name, vehi
 					width={ 288 }
 					height={ 288 }
 					alt={ full_name }
-				/> : <ReactImageGallery images={ images } photo={ photo } /> }
+				/> : <ReactSlick images={ images } photo={ photo } /> }
 		</div>
 	)
 }

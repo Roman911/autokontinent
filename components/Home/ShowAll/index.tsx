@@ -6,10 +6,10 @@ const ShowAll = ({ href }: { href: string }) => {
 	const t = useTranslations('Main');
 
 	return (
-		<div className='mt-8'>
+		<div className='mt-8 text-center'>
 			<Link
 				href={ href }
-				className='text-gray-400 font-bold hover:underline uppercase'
+				className='text-primary font-bold underline uppercase'
 			>
 				{ t('show all') }
 			</Link>

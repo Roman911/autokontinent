@@ -6,12 +6,11 @@ import { twMerge } from 'tailwind-merge';
 interface Props {
 	classnames?: string
 	data: Data
-	isList?: boolean
 }
 
-const ProductList: FC<Props> = ({ classnames, data, isList }) => {
+const ProductList: FC<Props> = ({ classnames, data }) => {
 	const products = data.products.map(item => {
-		return <ProductCard key={ item.group } item={ item } isList={ isList }/>
+		return <ProductCard key={ item.group } item={ item } />
 	})
 
 	return (

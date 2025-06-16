@@ -45,7 +45,7 @@ const ActionsBlock: FC<ActionsBlockProps> = ({ id, className, section, quantity 
 			<CallbackModal id={ id } quantity={ quantity }/>
 			<AddToDefense id={ id } section={ section } isProduct={ true } />
 			<AddToComparison id={ id } section={ section } isProduct={ true } />
-			<div className='w-12 h-12 p-3 bg-gray-200 rounded-full group cursor-pointer relative text-gray-400 hover:text-primary'>
+			<div className='w-12 h-12 p-3 bg-gray-100 rounded-full group cursor-pointer relative text-gray-400 hover:text-primary'>
 				<Icons.ShareIcon />
 				<div
 					className='absolute top-10 left-0 bg-white rounded shadow-md py-4 px-6 hidden group-hover:flex flex-col gap-4 z-10'>

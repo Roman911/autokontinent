@@ -35,7 +35,7 @@ const MyButton = ({ children, handleClick, section, sectionBtn, name }: MyButton
 			variant='light'
 			radius='none'
 			startContent={ <Icon className='w-6 h-6 md:w-8 md:h-8' /> }
-			className={ twMerge('p-4 md:px-6 md:w-52 text-lg md:text-xl font-semibold text-gray-300 border-b-1 border-gray-300 hover:text-white data-[hover=true]:bg-transparent hover:border-white', section === sectionBtn && 'text-white border-white') }
+			className={ twMerge('p-4 md:px-6 md:w-52 text-lg md:text-xl font-semibold text-gray-500 border-b-1 border-gray-500 hover:text-white data-[hover=true]:bg-transparent hover:border-white', section === sectionBtn && 'text-white border-white') }
 		>
 			{ children }
 		</Button>
@@ -67,10 +67,7 @@ const FilterBlock: FC<Props> = ({ children, section, onSubmit, className }) => {
 
 	return (
 		<div
-			className={ twMerge('flex-1 flex flex-col p-2 md:p-10 max-w-7xl w-full mx-auto md:mt-28', className, section === Section.Battery && 'md:bg-primary') }>
-			<div className='text-center font-semibold text-3xl md:text-5xl text-white mb-4 md:mb-10'>
-				{ t('selection of tires and wheels') }
-			</div>
+			className={ twMerge('absolute left-1/2 top-10 -translate-x-1/2 flex-1 flex flex-col p-2 max-w-7xl w-full', className, section === Section.Battery && 'md:bg-primary') }>
 			<div className='flex items-center justify-center gap-8 md:gap-20 mb-8 md:mb-0'>
 				<ButtonGroup className='gap-2'>
 					<MyButton section={ section } sectionBtn={ Section.Tires } handleClick={ handleClick } name='tire'>
@@ -88,12 +85,12 @@ const FilterBlock: FC<Props> = ({ children, section, onSubmit, className }) => {
 				className={ twMerge('grid grid-cols-1 md:grid-cols-7 gap-2.5 md:mt-7', section === Section.Car && 'md:grid-cols-6') }>
 				{ children }
 				{ section !== Section.Car && <Button
-					color='primary'
+					color='secondary'
 					isLoading={ isLoading }
 					size='lg'
 					radius='sm'
 					onPress={ onClick }
-					className='w-full font-semibold'
+					className='w-full font-semibold text-black'
 				>
 					{ t('choose') }
 				</Button> }

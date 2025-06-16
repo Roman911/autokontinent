@@ -29,7 +29,7 @@ interface Props {
 }
 
 const Title = ({ title }: { title: string }) => {
-	return <h6 className='text-lg mb-6 text-gray-600'>
+	return <h6 className='text-lg mb-6 text-gray-400'>
 		{ title }
 	</h6>
 }
@@ -75,10 +75,9 @@ const Footer: FC<Props> = ({ alias, settings }) => {
 		</Link>
 	}
 
-	return <footer className='bg-gray-800'>
+	return <footer className='bg-blue-900'>
 		<div className='container mx-auto py-12 px-4 flex flex-col md:flex-row text-white'>
 			<div className='md:w-1/4'>
-				<Logo />
 				<div className='flex mt-8 gap-x-5'>
 					{ social.links.map((item, index) => {
 						return <a
@@ -91,6 +90,9 @@ const Footer: FC<Props> = ({ alias, settings }) => {
 						</a>
 					}) }
 				</div>
+				<p className='mt-7 mb-7 leading-6 text-sm text-white'>
+					{ t('free shipping') }
+				</p>
 				<p className='mt-7 mb-7 leading-6 text-sm text-gray-600'>
 					© 2008-{ new Date().getFullYear() }. { t('all rights reserved') }.
 				</p>
@@ -103,6 +105,9 @@ const Footer: FC<Props> = ({ alias, settings }) => {
 					{ settings && <a href={ `mailto:${ settings[lang].config_email }` } className='ml-2.5 text-sm text-white hover:text-primary hover:underline'>
 						{ settings[lang].config_email }
 					</a> }
+				</div>
+				<div className='mt-4'>
+					<HtmlContent htmlString={ settings[lang].config_open || '' } />
 				</div>
 				<p className='block whitespace-pre-wrap mt-4 mb-5'>
 					{ settings[lang].config_address }
@@ -119,9 +124,6 @@ const Footer: FC<Props> = ({ alias, settings }) => {
 				{ alias.footer.map((item: AliasItem, index: number) => {
 					return link(`/page/${ item.slug }`, item.descriptions[lang].title, index)
 				}) }
-				<div className='mt-4'>
-					<HtmlContent htmlString={ settings[lang].config_open || '' } />
-				</div>
 			</div>
 		</div>
 	</footer>

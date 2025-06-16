@@ -37,7 +37,7 @@ const CarDiskFilter = ({ onClick }: { onClick?: () => void }) => {
 			<Link
 				onClick={ onClick }
 				href='/catalog/disks'
-				className='text-primary font-bold hover:underline'
+				className='text-gray-800 font-semibold uppercase underline hover:text-primary'
 			>
 				{ t('all brands') }
 			</Link>
@@ -58,7 +58,7 @@ const CarDiskFilter = ({ onClick }: { onClick?: () => void }) => {
 			<Link
 				onClick={ onClick }
 				href='/catalog/disks'
-				className='text-primary font-bold hover:underline'
+				className='text-gray-800 font-semibold uppercase underline hover:text-primary'
 			>
 				{ t('all car brands') }
 			</Link>

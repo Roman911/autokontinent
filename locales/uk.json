@@ -151,7 +151,8 @@
     "motorcycle tires": "Мотошини",
     "tire calculator": "Шинний калькулятор",
     "tires": "Шини",
-    "goods": "Товари"
+    "goods": "Товари",
+    "free shipping": "Безкоштовна доставка у межах України."
   },
   "HeaderFilter": {
     "add all": "Додати всі",
@@ -192,6 +193,8 @@
     "about us": "Про нас",
     "accessories": "Аксесуари",
     "akb": "Акб",
+    "all tires": "Всі шини",
+    "all disks": "Всі диски",
     "auto goods": "Автотовари",
     "battery": "Акумулятори",
     "brands": "Бренди",

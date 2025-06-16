@@ -75,7 +75,7 @@ const FilterAlt: FC<Props> = ({ filterData, section, car }) => {
 		<>
 			{ section !== Section.Battery && <SwitchTabs section={ section } car={ car }/> }
 			<div
-				className='relative pb-32 lg:pb-4 px-4 pt-4 bg-white border border-gray-200 z-10 overflow-y-auto lg:overflow-y-visible'>
+				className='relative pb-32 lg:pb-4 px-4 pt-4 bg-white border border-gray-300 z-10 overflow-y-auto lg:overflow-y-visible'>
 				{ section !== Section.Battery && <SwitchTabsByParams subsection={ subsection }/> }
 				{ subsection === 'byCars' && <ByCar data={ data } car={ car } section={ section }/> }
 				{ section === Section.Tires && <SectionTires onChange={ onChange } filterData={ filterData }/> }

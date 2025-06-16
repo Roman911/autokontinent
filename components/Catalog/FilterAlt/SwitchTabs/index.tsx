@@ -13,8 +13,8 @@ const SwitchTabs = ({ section, car }: { section: Section, car: string | null }) 
 			<Link
 				href={ url }
 				className={ twMerge(
-					'text-sm font-bold uppercase py-3.5 rounded-t-sm text-center text-white bg-[#070F15]',
-					section !== value && 'bg-gray-200 text-gray-400'
+					'text-sm font-bold uppercase py-3.5 rounded-t-sm text-center text-black bg-white border border-gray-300',
+					section !== value && 'bg-gray-100 text-gray-400'
 				) }
 			>
 				{ t(value) }

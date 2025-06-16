@@ -71,10 +71,10 @@ const BuyActions: FC<Props> = ({ offerId, quantity, section, data, onSubmit }) =
 				<Alert description={ t('minimum quantity of goods') } title={ t('warning') } radius='sm' className='shadow-lg'/>
 			</div>
 			{ cartItems.find(item => +item.id === offerId) ?
-				<Button color='success' onPress={ onOpen } className='uppercase w-full font-bold lg:w-72'>
+				<Button color='success' onPress={ onOpen } className='w-full font-bold lg:w-72'>
 					{ t('in cart') }
 				</Button> :
-				<Button onPress={ handleClickBuy } className='uppercase w-full font-bold lg:w-72'>
+				<Button color='secondary' onPress={ handleClickBuy } className='w-full font-bold lg:w-72 text-black'>
 					{ t('buy') }
 				</Button>
 			}

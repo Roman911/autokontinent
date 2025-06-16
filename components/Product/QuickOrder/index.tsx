@@ -106,7 +106,7 @@ const QuickOrder: FC<Props> = (
 				onPress={ onOpen }
 				variant='bordered'
 				color='default'
-				className='text-black mt-2.5 w-full lg:w-72 hover:shadow uppercase font-bold'
+				className='text-black mt-2.5 w-full lg:w-72 hover:shadow font-bold'
 			>
 				{ t('quick order') }
 			</Button>

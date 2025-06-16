@@ -87,7 +87,7 @@ const ProductComponent: FC<Props> = ({ idProduct, locale, data, section, setting
 						<div className='flex-1 md:ml-6 xl:ml-10'>
 							<h1 className='text-2xl font-bold mt-8 md:mt-0'>{ full_name }</h1>
 							<div className='flex mt-5 items-center'>
-								<div className='text-[15px] text-[#707680] bg-gray-200 rounded-full py-1 px-3 mr-5'>
+								<div className='text-[15px] text-gray-700 bg-gray-100 rounded-full py-1 px-3 mr-5'>
 									Артикул: { offer_group?.sku }
 								</div>
 								<Rating

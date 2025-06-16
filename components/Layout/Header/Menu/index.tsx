@@ -31,7 +31,7 @@ const Navbar = () => {
 				variant='light'
 				size='lg'
 				radius='none'
-				className='font-semibold h-12 uppercase hover:!bg-white hover:text-primary'
+				className='font-semibold h-12 hover:!bg-white hover:text-primary'
 				endContent={ <Icons.ChevronDownIcon
 					width='14'
 					height='14'
@@ -42,9 +42,13 @@ const Navbar = () => {
 			</Button>
 			<div
 				className={ twMerge('absolute container left-1/2 top-12 z-30 w-full -translate-x-1/2 px-4 hidden group group-hover:flex', reset && 'hidden') }>
-				<div
-					className='w-full flex-auto overflow-hidden bg-white shadow-lg ring-1 ring-gray-900/5 py-8 px-12 grid grid-cols-4'>
-					{ sectionItem === Section.Tires ? <CarTireFilter onClick={ handleClick } /> : <CarDiskFilter onClick={ handleClick } /> }
+				<div className='w-full flex-auto overflow-hidden bg-white shadow-lg ring-1 ring-gray-900/5'>
+					<div className='py-8 px-12 grid grid-cols-4'>
+						{ sectionItem === Section.Tires ? <CarTireFilter onClick={ handleClick } /> : <CarDiskFilter onClick={ handleClick } /> }
+					</div>
+					<Button as={ Link } href={ `/catalog/${sectionItem}` } radius='none' className='w-full font-semibold'>
+						{ t(`all ${ sectionItem }`) }
+					</Button>
 				</div>
 			</div>
 		</div>
@@ -58,7 +62,7 @@ const Navbar = () => {
 						return <ButtonMeu key={ i } sectionItem={ item.section } label={ item.label } />
 					})}
 				{ links.map((item, index) => {
-					return <Link key={ index } onClick={ () => item.url === '/catalog/tires' ? dispatch(changeSubsection(Subsection.ByCars)) : '' } href={ item.url } className='font-semibold hover:bg-white hover:text-secondary h-12 px-6 flex items-center uppercase'>
+					return <Link key={ index } onClick={ () => item.url === '/catalog/tires' ? dispatch(changeSubsection(Subsection.ByCars)) : '' } href={ item.url } className='font-semibold hover:bg-white hover:text-primary h-12 px-6 flex items-center'>
 						{ t(item.title) }
 					</Link>
 				}) }
@@ -68,7 +72,7 @@ const Navbar = () => {
 							variant='light'
 							size='lg'
 							radius='none'
-							className='font-semibold h-12 uppercase w-40 hover:!bg-white hover:text-primary'
+							className='font-semibold h-12 w-40 hover:!bg-white hover:text-primary'
 							endContent={ <Icons.ChevronDownIcon
 								width='14'
 								height='14'
