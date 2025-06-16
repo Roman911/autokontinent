@@ -1,11 +1,7 @@
 export const links = [
 	{
-		title: 'auto goods',
-		url: '/auto-goods',
-	},
-	{
-		title: 'services',
-		url: '/services',
+		title: 'selection by car',
+		url: '/catalog/tires',
 	},
 	{
 		title: 'tire calculator',
