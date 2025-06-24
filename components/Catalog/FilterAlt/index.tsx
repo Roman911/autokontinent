@@ -2,8 +2,8 @@
 import { FC } from 'react';
 import { useTranslations } from 'next-intl';
 import { usePathname, useRouter } from '@/i18n/routing';
-import { Drawer, DrawerContent, useDisclosure } from '@heroui/react';
-import { useAppSelector } from '@/hooks/redux';
+import { useAppDispatch, useAppSelector } from '@/hooks/redux';
+import { setMenuIsOpen } from '@/store/slices/filterIsOpenSlice';
 import SwitchTabs from './SwitchTabs';
 import SwitchTabsByParams from './SwitchTabsByParams';
 import { Section } from '@/models/filter';
@@ -15,6 +15,8 @@ import FilterBtn from '@/components/Catalog/FilterByCar/FilterBtn';
 import { SectionTires } from '@/components/Catalog/FilterAlt/SectionTires';
 import SectionDisks from '@/components/Catalog/FilterAlt/SectionDisks';
 import SectionBattery from '@/components/Catalog/FilterAlt/SectionBattery';
+import { twMerge } from 'tailwind-merge';
+import * as Icons from '@/components/UI/Icons';
 
 interface Props {
 	filterData: BaseDataProps | undefined;
@@ -25,10 +27,11 @@ interface Props {
 const FilterAlt: FC<Props> = ({ filterData, section, car }) => {
 	const router = useRouter();
 	const path = usePathname();
+	const dispatch = useAppDispatch();
 	const t = useTranslations('Filters');
 	const { subsection } = useAppSelector(state => state.filterReducer);
+	const { menuIsOpen } = useAppSelector(state => state.filterIsOpenReducer);
 	const { data } = baseDataAPI.useFetchBaseDataQuery('');
-	const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
 	const updateParamInUrl = (url: string, param: string, newValue: string): string => {
 		const regex = new RegExp(`${param}-\\d+(,\\d+)*`, 'g');
@@ -94,13 +97,23 @@ const FilterAlt: FC<Props> = ({ filterData, section, car }) => {
 		</>
 	);
 
+	const onOpenChange = (isOpen: boolean) => {
+		dispatch(setMenuIsOpen(isOpen));
+	}
+
 	return (
-		<div className='w-72'>
-			<FilterBtn openFilter={ onOpen } title={ t('filters') }/>
+		<div className='w-72 duration-0'>
+			<FilterBtn openFilter={ onOpenChange } title={ t('filters') }/>
 			<div className='hidden lg:block'>{ renderFilterContent() }</div>
-			<Drawer isOpen={ isOpen } radius='none' placement='left' onOpenChange={ onOpenChange }>
-				<DrawerContent>{ renderFilterContent() }</DrawerContent>
-			</Drawer>
+			<div>
+				<div className={ twMerge('z-50 bg-overlay/50 backdrop-opacity-disabled w-screen h-screen fixed hidden inset-0', menuIsOpen && 'block') }></div>
+				<div className={twMerge('z-50 backdrop-opacity-disabled w-screen h-screen fixed overflow-x-auto hidden bg-white dark:bg-[#18181b] inset-0', menuIsOpen && 'block')}>
+					<button className='absolute top-2 right-2 z-100 p-2' onClick={ () => onOpenChange(false) } >
+						<Icons.CloseIcon className='h-4 w-4'/>
+					</button>
+					{ renderFilterContent() }
+				</div>
+			</div>
 		</div>
 	);
 };

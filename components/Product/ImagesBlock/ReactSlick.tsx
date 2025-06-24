@@ -2,7 +2,7 @@ import { FC, MouseEvent, TouchEvent, useRef, useState } from 'react';
 import Image from 'next/image';
 import Slider, { CustomArrowProps } from 'react-slick';
 import { Photo } from '@/models/product';
-import { Modal, ModalBody, ModalContent, useDisclosure, } from "@heroui/modal";
+import { Modal, ModalBody, ModalContent, useDisclosure, } from "@heroui/react";
 import './index.scss';
 
 const swipeThreshold = 10;

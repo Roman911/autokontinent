@@ -7,18 +7,30 @@ import './index.scss';
 import * as Icons from '@/components/UI/Icons';
 import SearchInput from './SearchInput';
 import type { Options } from '@/models/baseData';
+import { IOpenFilter } from '@/models/filter';
 
 interface SelectProps {
 	id: string
 	label: string
 	name: string
 	variant: 'white' | 'gray'
+	isOpened?: boolean
+	scroll?: number | null
 	search?: boolean
 	options: Array<Options>
 	focusValue?: string | false
 	onChangeAction: (id: string, name: string, value: string[]) => void
 	filterValue?: string[]
 	valueStudded?: null | string
+	handleScrollAction?: (name: keyof IOpenFilter, value: number) => void
+	handleClickAction: (name: keyof IOpenFilter, value: boolean) => void
+	filterOther?: {
+		only_c: string | null | undefined
+		only_xl: string | null | undefined
+		only_owl: string | null | undefined
+		only_run_flat: string | null | undefined
+		only_off_road: string | null | undefined
+	}
 }
 
 const otherOptions: Record<string, string> = {
@@ -37,12 +49,16 @@ export const Select: FC<SelectProps> = (
 		variant,
 		search,
 		options,
+		isOpened,
+		scroll,
 		onChangeAction,
 		focusValue,
 		filterValue,
-		valueStudded
+		valueStudded,
+		handleScrollAction,
+		handleClickAction,
+		filterOther
 	}) => {
-	const [ open, setOpen ] = useState(false);
 	const [ active, setActive ] = useState<string[]>([]);
 	const [ eventSearch, setEventSearch ] = useState('');
 	const ref = useRef<HTMLDivElement | null>(null);
@@ -56,8 +72,16 @@ export const Select: FC<SelectProps> = (
 		}
 	}, [ filterValue ]);
 
+	useEffect(() => {
+		if(ref.current && scroll) {
+			setTimeout(() => {
+				ref.current?.scroll(0, scroll);
+			}, 15);
+		}
+	}, [scroll])
+
 	const handleClickOpen = useCallback(() => {
-		setOpen(prev => !prev);
+		handleClickAction(name as keyof IOpenFilter, !isOpened);
 
 		if(focusValue && ref.current) {
 			const cont = ref.current.querySelectorAll('label');
@@ -68,7 +92,7 @@ export const Select: FC<SelectProps> = (
 				}, 15);
 			}
 		}
-	}, [ focusValue ]);
+	}, [focusValue, handleClickAction, isOpened, name]);
 
 	const handleChange = (value: string) => {
 		setEventSearch(value.toLowerCase());
@@ -96,15 +120,15 @@ export const Select: FC<SelectProps> = (
       </span>
 			</button>
 		</Badge>
-		{ search && open && <SearchInput value={ eventSearch } handleChange={ handleChange }/> }
+		{ search && isOpened && <SearchInput value={ eventSearch } handleChange={ handleChange }/> }
 		{ name === 'other' ?
-			<div className={ twMerge('flex flex-col flex-wrap gap-2 data-[orientation=horizontal]:flex-row px-2.5 pb-2.5', !open && 'hidden') }>
+			<div className={ twMerge('flex flex-col flex-wrap gap-2 data-[orientation=horizontal]:flex-row px-2.5 pb-2.5', !isOpened && 'hidden') }>
 				{ options.map(item => {
 					return <Checkbox
 						key={ item.value }
 						size='lg'
 						radius='sm'
-						isSelected={ valueStudded === '1' }
+						isSelected={ !!filterOther?.[item.value as keyof typeof filterOther] }
 						onValueChange={ (value) => onChangeAction(otherOptions[item.value], 'only_studded', value ? [ '1' ] : []) }
 						value={ String(item.value) }
 						classNames={ {
@@ -121,11 +145,14 @@ export const Select: FC<SelectProps> = (
 				radius='sm'
 				ref={ ref }
 				onChange={ (value) => {
-					setActive(value); // обов'язково оновлюємо локальний state
+					setActive(value);
 					onChangeAction(id, name, value);
+					if(handleScrollAction && ref.current) {
+						handleScrollAction(name as keyof IOpenFilter, ref.current ? ref.current.scrollTop : 0);
+					}
 				} }
-				value={ active } // контрольований компонент
-				className={ twMerge('relative max-h-[480px] w-full overflow-auto', !open && 'hidden') }
+				value={ active }
+				className={ twMerge('relative max-h-[480px] w-full overflow-auto', !isOpened && 'hidden') }
 				classNames={ { wrapper: 'px-2.5 pb-2.5' } }
 			>
 				{ options?.filter(i => i.label.toString().toLowerCase().includes(eventSearch)).map(item => {
@@ -144,7 +171,7 @@ export const Select: FC<SelectProps> = (
 				color='primary'
 				isSelected={ valueStudded === '1' }
 				onValueChange={ (value) => onChangeAction('stud', 'only_studded', value ? [ '1' ] : []) }
-				className={ twMerge('before-bg-white ml-6', !open && 'hidden') }
+				className={ twMerge('before-bg-white ml-6', !isOpened && 'hidden') }
 				value='1'
 				classNames={ {
 					label: twMerge('text-black text-base'),

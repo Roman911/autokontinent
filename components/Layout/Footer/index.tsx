@@ -74,8 +74,8 @@ const Footer: FC<Props> = ({ alias, settings }) => {
 		</Link>
 	}
 
-	return <footer className='bg-blue-900'>
-		<div className='container mx-auto py-12 px-4 flex flex-col md:flex-row text-white'>
+	return <footer className='bg-blue-900 xl:ml-32 relative z-30'>
+		<div className='container mx-auto max-w-7xl py-12 px-4 flex flex-col md:flex-row text-white'>
 			<div className='md:w-1/4'>
 				<div className='flex mt-8 gap-x-5'>
 					{ social.links.map((item, index) => {

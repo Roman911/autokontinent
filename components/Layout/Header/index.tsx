@@ -13,7 +13,7 @@ interface Props {
 
 const Header: FC<Props> = ({ alias, settings }) => {
 	return (
-		<div className='header xl:ml-32'>
+		<div className='header xl:ml-32 relative z-30'>
 			<Progress />
 			<TopLine alias={ alias } settings={ settings } />
 			<HeaderMain settings={ settings } />

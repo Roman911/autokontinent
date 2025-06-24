@@ -4,7 +4,9 @@ import cartReducer from './slices/cartSlice';
 import comparisonReducer from './slices/comparisonSlice';
 import filterCarReducer from './slices/filterCarSlice';
 import filterReducer from './slices/filterSlice';
+import filterIsOpenReducer from './slices/filterIsOpenSlice';
 import orderReducer from './slices/orderSlice';
+import productsReducer from './slices/productsSlice';
 import progressReducer from './slices/progressSlice';
 import settingsReducer from './slices/settingsSlice';
 import searchReducer from './slices/searchSlice';
@@ -16,7 +18,9 @@ const rootReducer = combineReducers({
 	comparisonReducer,
 	filterCarReducer,
 	filterReducer,
+	filterIsOpenReducer,
 	orderReducer,
+	productsReducer,
 	progressReducer,
 	settingsReducer,
 	searchReducer,

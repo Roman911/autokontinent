@@ -14,19 +14,21 @@ interface Props {
 	result: boolean | undefined
 	data: Data | undefined
 	isCatalog?: boolean
+	isLoading?: boolean
+	isFetching?: boolean
 }
 
-const CatalogContent: FC<Props> = ({ section, slug, locale, data, result, isCatalog }) => {
-
+const CatalogContent: FC<Props> = ({ section, slug, locale, data, result, isCatalog, isFetching, isLoading }) => {
   return (
 		<>
 			<div className='flex justify-end mb-2'>
 				{ isCatalog && <FilterActive section={ section } locale={ locale } className='hidden lg:flex' slug={ slug } /> }
 			</div>
-			{ (result && data) ? <ProductList
+			{ !result && !isLoading && !isFetching && !data && <NoResult noResultText='no result' /> }
+			{ (result && data) && <ProductList
 				classnames={ `grid-cols-2 lg:grid-cols-${ isCatalog ? 3 : 4 }` }
 				data={ data }
-			/> : <NoResult noResultText='no result' /> }
+			/> }
 		</>
 	);
 };
