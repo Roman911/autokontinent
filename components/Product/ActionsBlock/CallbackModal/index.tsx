@@ -80,7 +80,7 @@ const CallbackModal: FC<Props> = ({ id, quantity }) => {
 									<p className="text-sm text-gray-500">
 										{ t('put phone') }
 									</p>
-									<PhoneMaskInput phoneErrorMessage={ null } ref={ phoneInputRef }/>
+									<PhoneMaskInput phoneErrorMessage={ null } />
 									<Button type='submit' color='primary' radius='full' size='lg' isLoading={ isLoading }
 													className='uppercase font-bold'>
 										{ t('send') }
