@@ -1,5 +1,5 @@
 'use client'
-import { FC, FormEvent, useEffect, useRef } from 'react';
+import { FC, FormEvent, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { addToast } from '@heroui/toast';
 import * as Icons from '@/components/UI/Icons';
@@ -19,39 +19,33 @@ const CallbackModal: FC<Props> = ({ id, quantity }) => {
 	const t = useTranslations('CallbackModal');
 	const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
 	const [ createCallback, { isLoading } ] = baseDataAPI.useCreateCallbackMutation();
-	const phoneInputRef = useRef<HTMLInputElement>(null);
-
-	useEffect(() => {
-		if(isOpen) {
-			const timeout = setTimeout(() => {
-				phoneInputRef.current?.focus();
-			}, 100);
-
-			return () => clearTimeout(timeout);
-		}
-	}, [ isOpen ]);
+	const [ phoneErrorMessage, setPhoneErrorMessage ] = useState<string | null>(null);
 
 	const onSubmit = async(event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		const formData = new FormData(event.currentTarget);
 		const phone = formData.get('phone') as string;
 
-		await createCallback({
-			phone: formatPhoneNumber(phone),
-			product_id: id?.toString(),
-			quantity: quantity.toString(),
-		}).then((response: { data?: { result: boolean }; error?: FetchBaseQueryError | SerializedError }) => {
-			if(response?.data?.result) {
-				addToast({
-					title: t('sent message'),
-					description: t('our manager'),
-					classNames: { base: 'text-black', title: 'text-black' },
-				});
-				onClose();
-			} else if(response.error) {
-				console.error('An error occurred:', response.error);
-			}
-		});
+		if(phone.length < 13) {
+			setPhoneErrorMessage('enter your phone number');
+		} else {
+			await createCallback({
+				phone: formatPhoneNumber(phone),
+				product_id: id?.toString(),
+				quantity: quantity.toString(),
+			}).then((response: { data?: { result: boolean }; error?: FetchBaseQueryError | SerializedError }) => {
+				if(response?.data?.result) {
+					addToast({
+						title: t('sent message'),
+						description: t('our manager'),
+						classNames: { base: 'text-black', title: 'text-black' },
+					});
+					onClose();
+				} else if(response.error) {
+					console.error('An error occurred:', response.error);
+				}
+			});
+		}
 	}
 
 	return (
@@ -80,7 +74,7 @@ const CallbackModal: FC<Props> = ({ id, quantity }) => {
 									<p className="text-sm text-gray-500">
 										{ t('put phone') }
 									</p>
-									<PhoneMaskInput phoneErrorMessage={ null } />
+									<PhoneMaskInput phoneErrorMessage={ phoneErrorMessage } />
 									<Button type='submit' color='primary' radius='full' size='lg' isLoading={ isLoading }
 													className='uppercase font-bold'>
 										{ t('send') }
