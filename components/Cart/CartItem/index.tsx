@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import Image from 'next/image';
 import Button from '@/components/UI/Button';
 import { Link } from '@/i18n/routing';
@@ -7,7 +7,6 @@ import { countryCodeTransform } from '@/lib/countryCodetransform';
 import CountryInfo from '@/components/UI/CountryInfo';
 import Quantity from '@/components/UI/Quantity';
 import { twMerge } from 'tailwind-merge';
-import { useTranslations } from 'next-intl';
 
 interface CartItemProps {
 	id: number
@@ -21,9 +20,8 @@ interface CartItemProps {
 	country_ru: string
 	year: number
 	locale: string
-	offerQuantity: number,
+	offerQuantity: number
 	isLastItem: boolean
-	isBattery: boolean
 	removeProduct: (id: number) => void
 	setQuantity: (id: number, quantity: number) => void
 }
@@ -44,11 +42,8 @@ const CartItem: FC<CartItemProps> = (
 		setQuantity,
 		removeProduct,
 		locale,
-		isBattery,
 		isLastItem,
 	}) => {
-	const t = useTranslations('Main');
-
 	const onChange = (e: { target: HTMLInputElement }) => {
 		const value = e.target.value;
 		const onlyNumbers = value.replace(/\D/g, '');

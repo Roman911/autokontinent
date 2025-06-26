@@ -71,7 +71,6 @@ const CartComponent: FC<CarProps> = ({ data, cartItems, removeProduct, setQuanti
 						removeProduct={ removeProduct }
 						setQuantity={ setQuantity }
 						locale={ locale }
-						isBattery={ !!item.jemnist }
 						isLastItem={ data ? data.data.products.length === index + 1 : true }
 					/>
 				}) }
