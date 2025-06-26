@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 import Button from '@/components/UI/Button';
 import { Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } from '@heroui/react';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
@@ -12,8 +12,6 @@ import { removeCart, setQuantity } from '@/store/slices/cartSlice';
 import CartComponent from '@/components/Cart';
 import NoResult from '@/components/UI/NoResult';
 import Spinner from '@/components/UI/Spinner';
-import { Alert } from '@heroui/react';
-import { twMerge } from 'tailwind-merge';
 
 interface Props {
 	offerId: number
@@ -24,7 +22,6 @@ interface Props {
 }
 
 const BuyActions: FC<Props> = ({ offerId, quantity, section, data, onSubmit }) => {
-	const [ showAlert, setShowAlert ] = useState(false);
 	const { isOpen, onOpen, onOpenChange } = useDisclosure();
 	const t = useTranslations('Main');
 	const dispatch = useAppDispatch();
@@ -37,12 +34,6 @@ const BuyActions: FC<Props> = ({ offerId, quantity, section, data, onSubmit }) =
 			products: [ ...tires, ...cargo, ...disks, ...battery ]
 		}
 	};
-
-	useEffect(() => {
-		if(showAlert) {
-			setTimeout(() => setShowAlert(false), 5000);
-		}
-	}, [showAlert])
 
 	const removeProduct = (id: number) => {
 		removeFromStorage('reducerCart', id);
@@ -57,19 +48,12 @@ const BuyActions: FC<Props> = ({ offerId, quantity, section, data, onSubmit }) =
 	}
 
 	const handleClickBuy = () => {
-		if(section !== Section.Battery && quantity === 1 || quantity === 3) {
-			setShowAlert(true);
-		} else {
-			onSubmit();
-			onOpen();
-		}
+		onSubmit();
+		onOpen();
 	}
 
 	return (
 		<div className='relative buttons-buy flex flex-col items-end gap-2'>
-			<div className={ twMerge('items-center justify-center absolute -top-6 right-0 hidden opacity-0 transition duration-300 ease-in-out', showAlert && 'flex opacity-100 -top-26') }>
-				<Alert description={ t('minimum quantity of goods') } title={ t('warning') } radius='sm' className='shadow-lg'/>
-			</div>
 			{ cartItems.find(item => +item.id === offerId) ?
 				<Button color='success' onPress={ onOpen } className='w-full font-bold lg:w-72'>
 					{ t('in cart') }

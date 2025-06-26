@@ -25,12 +25,13 @@ const CallbackModal: FC<Props> = ({ id, quantity }) => {
 		event.preventDefault();
 		const formData = new FormData(event.currentTarget);
 		const phone = formData.get('phone') as string;
+		const phoneTransform = formatPhoneNumber(phone);
 
-		if(phone.length < 13) {
+		if(phoneTransform.length < 13) {
 			setPhoneErrorMessage('enter your phone number');
 		} else {
 			await createCallback({
-				phone: formatPhoneNumber(phone),
+				phone: phoneTransform,
 				product_id: id?.toString(),
 				quantity: quantity.toString(),
 			}).then((response: { data?: { result: boolean }; error?: FetchBaseQueryError | SerializedError }) => {
@@ -56,7 +57,7 @@ const CallbackModal: FC<Props> = ({ id, quantity }) => {
 					<Icons.PhoneCircuitIcon className='stroke-white'/>
 				</span>
 			</button>
-			<Modal isOpen={ isOpen } onOpenChange={ onOpenChange }>
+			<Modal isOpen={ isOpen } onOpenChange={ onOpenChange } placement='top-center'>
 				<ModalContent>
 					{ () => (
 						<>

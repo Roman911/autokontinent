@@ -1,4 +1,4 @@
-import { Dispatch, FC, SetStateAction, useEffect } from 'react';
+import { FC, useEffect } from 'react';
 import Image from 'next/image';
 import Button from '@/components/UI/Button';
 import { Link } from '@/i18n/routing';
@@ -7,7 +7,6 @@ import { countryCodeTransform } from '@/lib/countryCodetransform';
 import CountryInfo from '@/components/UI/CountryInfo';
 import Quantity from '@/components/UI/Quantity';
 import { twMerge } from 'tailwind-merge';
-import { Alert } from '@heroui/react';
 import { useTranslations } from 'next-intl';
 
 interface CartItemProps {
@@ -25,7 +24,6 @@ interface CartItemProps {
 	offerQuantity: number,
 	isLastItem: boolean
 	isBattery: boolean
-	setMinQuantity: Dispatch<SetStateAction<boolean>>
 	removeProduct: (id: number) => void
 	setQuantity: (id: number, quantity: number) => void
 }
@@ -48,17 +46,8 @@ const CartItem: FC<CartItemProps> = (
 		locale,
 		isBattery,
 		isLastItem,
-		setMinQuantity
 	}) => {
 	const t = useTranslations('Main');
-
-	useEffect(() => {
-		if(!isBattery && (quantity === 1 || quantity === 3)) {
-			setMinQuantity(true);
-		} else {
-			setMinQuantity(false);
-		}
-	}, [quantity]);
 
 	const onChange = (e: { target: HTMLInputElement }) => {
 		const value = e.target.value;
@@ -69,9 +58,6 @@ const CartItem: FC<CartItemProps> = (
 	}
 
 	return <div className={ twMerge('relative flex flex-col lg:flex-row py-4 items-center border-b border-gray-300', isLastItem && 'border-b-0') }>
-		{ !isBattery && (quantity === 1 || quantity === 3) && <div className='flex items-center justify-center absolute md:bottom-0 left-0 max-w-5/6 md:left-auto md:right-0'>
-			<Alert radius='sm' description={ t('minimum quantity of goods') } title={ t('warning') } className='shadow-md py-1.5 px-2.5' />
-		</div> }
 		<Link href={`/${pageUrl}`}>
 			<Image src={ default_photo || (locale === Language.UK ? '/images/no-photo.jpg' : '/images/no-photo-ru.jpg') } height={ 122 } width={ 122 } alt={ full_name } />
 		</Link>

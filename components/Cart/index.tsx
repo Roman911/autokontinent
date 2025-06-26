@@ -1,5 +1,5 @@
 'use client'
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { useRouter } from '@/i18n/routing';
 import { useLocale, useTranslations } from 'next-intl';
 import { ScrollShadow } from '@heroui/react';
@@ -32,7 +32,6 @@ interface CarProps {
 
 const CartComponent: FC<CarProps> = ({ data, cartItems, removeProduct, setQuantity }) => {
 	const router = useRouter();
-	const [ minQuantity, setMinQuantity ] = useState(false);
 	const locale = useLocale();
 	const lang = locale === Language.UK ? Language.UK : Language.RU;
 	const t = useTranslations('Cart');
@@ -48,7 +47,6 @@ const CartComponent: FC<CarProps> = ({ data, cartItems, removeProduct, setQuanti
 	const totalQuantityPrice = items?.reduce((sum, item) => sum + (item.quantity ?? 0) * parseFloat(item.price), 0);
 
 	const handleClick = () => {
-		if(minQuantity) return;
 		router.push(`/order`);
 	}
 
@@ -74,7 +72,6 @@ const CartComponent: FC<CarProps> = ({ data, cartItems, removeProduct, setQuanti
 						setQuantity={ setQuantity }
 						locale={ locale }
 						isBattery={ !!item.jemnist }
-						setMinQuantity={ setMinQuantity }
 						isLastItem={ data ? data.data.products.length === index + 1 : true }
 					/>
 				}) }

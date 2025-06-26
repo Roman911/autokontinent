@@ -59,8 +59,7 @@ const Summary: FC<SummaryProps> = ({ data, isLoading, loadingBtn, cartItems }) =
 					<div>{ t('total sum') }</div>
 					<div>{ totalQuantityPrice } грн</div>
 				</div>
-				<Button type='submit'
-								className='w-full uppercase font-bold' isLoading={ loadingBtn } disabled={ loadingBtn }>
+				<Button type='submit' className='w-full uppercase font-bold' isLoading={ loadingBtn } disabled={ loadingBtn }>
 					{ t('place an order') }
 				</Button>
 			</div>
